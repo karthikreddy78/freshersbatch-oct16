@@ -1,0 +1,5 @@
+Exercise Questions
+
+1)	db.addresses.find()
+
+2)	

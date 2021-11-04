@@ -1,0 +1,98 @@
+use admin
+'switched to db admin'
+use MongoLearn
+'switched to db MongoLearn'
+show collections
+new
+db.server
+MongoLearn.server
+show dbs
+MongoLearn   8.19 kB
+Mydb         81.9 kB
+Sample1      81.9 kB
+VideoPlayer    41 kB
+ecommerce     225 kB
+empdb          41 kB
+eventsdb       41 kB
+test         8.19 kB
+admin         344 kB
+local        5.25 GB
+db.createCollection("employee")
+{ ok: 1 }
+show collections
+employee
+new
+use employee
+'switched to db employee'
+use MongoLearn
+'switched to db MongoLearn'
+db.insertOne({name:"Karthik"})
+TypeError: db.insertOne is not a function
+db.employee.insertOne({name:"Karthik"})
+{ acknowledged: true,
+  insertedId: ObjectId("617c2390fbc11ad7b8a6b1fd") }
+db.find()
+TypeError: db.find is not a function
+db.employee.find()
+{ _id: ObjectId("617c2390fbc11ad7b8a6b1fd"), name: 'Karthik' }
+db.new.drop()
+true
+show collection
+MongoshInvalidInputError: [COMMON-10001] 'collection' is not a valid argument for "show".
+show collections
+employee
+db.insertOne({name:"Deepak"})
+TypeError: db.insertOne is not a function
+db.employee.insertMany({name:"Deepak"},{name:"Ram"})
+MongoInvalidArgumentError: Argument "docs" must be an array of documents
+db.employee.find()
+{ _id: ObjectId("617c2390fbc11ad7b8a6b1fd"), name: 'Karthik' }
+db.employee.insertMany([{name:"Deepak"},{name:"Ram"}])
+{ acknowledged: true,
+  insertedIds: 
+   { '0': ObjectId("617c2c77fbc11ad7b8a6b1fe"),
+     '1': ObjectId("617c2c77fbc11ad7b8a6b1ff") } }
+db.employee.find()
+{ _id: ObjectId("617c2390fbc11ad7b8a6b1fd"), name: 'Karthik' }
+{ _id: ObjectId("617c2c77fbc11ad7b8a6b1fe"), name: 'Deepak' }
+{ _id: ObjectId("617c2c77fbc11ad7b8a6b1ff"), name: 'Ram' }
+db.employee.find().pretty()
+{ _id: ObjectId("617c2390fbc11ad7b8a6b1fd"), name: 'Karthik' }
+{ _id: ObjectId("617c2c77fbc11ad7b8a6b1fe"), name: 'Deepak' }
+{ _id: ObjectId("617c2c77fbc11ad7b8a6b1ff"), name: 'Ram' }
+db.employee.insertMany([{name:"Deepak Musku",age:18},{name:"Ram Reddy",age:50}])
+{ acknowledged: true,
+  insertedIds: 
+   { '0': ObjectId("617c2d08fbc11ad7b8a6b200"),
+     '1': ObjectId("617c2d08fbc11ad7b8a6b201") } }
+db.employee.find().pretty()
+{ _id: ObjectId("617c2390fbc11ad7b8a6b1fd"), name: 'Karthik' }
+{ _id: ObjectId("617c2c77fbc11ad7b8a6b1fe"), name: 'Deepak' }
+{ _id: ObjectId("617c2c77fbc11ad7b8a6b1ff"), name: 'Ram' }
+{ _id: ObjectId("617c2d08fbc11ad7b8a6b200"),
+  name: 'Deepak Musku',
+  age: 18 }
+{ _id: ObjectId("617c2d08fbc11ad7b8a6b201"),
+  name: 'Ram Reddy',
+  age: 50 }
+db.employee.find().explain()
+{ queryPlanner: 
+   { plannerVersion: 1,
+     namespace: 'MongoLearn.employee',
+     indexFilterSet: false,
+     parsedQuery: {},
+     winningPlan: { stage: 'COLLSCAN', direction: 'forward' },
+     rejectedPlans: [] },
+  serverInfo: 
+   { host: 'cluster0-shard-00-02.fckxj.mongodb.net',
+     port: 27017,
+     version: '4.4.10',
+     gitVersion: '58971da1ef93435a9f62bf4708a81713def6e88c' },
+  ok: 1,
+  '$clusterTime': 
+   { clusterTime: Timestamp({ t: 1635529945, i: 3 }),
+     signature: 
+      { hash: Binary(Buffer.from("b06063bd74b2004c74345638e20879b7fd337c5e", "hex"), 0),
+        keyId: 6984513079891460000 } },
+  operationTime: Timestamp({ t: 1635529941, i: 9 }) }
+Atlas Cluster0-shard-0 [primary] MongoLearn
